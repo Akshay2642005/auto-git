@@ -4,7 +4,7 @@ use names::Generator;
 use std::fs::File;
 use std::io::{self, Write};
 use std::process::{exit, Command};
-
+//git_init function
 fn git_init() {
     // Step 1: Create the README.md file and write initial content to it
     let mut readme = File::create("README.md").expect("Failed to create README.md");
@@ -140,7 +140,6 @@ fn git_init() {
 }
 
 //Update the git repository
-//
 fn git_update_repo() {
     let mut add_command = Command::new("git")
         .arg("add")
@@ -176,6 +175,8 @@ fn name_generator() -> String {
     let mut generator = Generator::default();
     generator.next().unwrap()
 }
+
+//main function
 fn main() {
     let options = vec![
         "Initialize a new git repository",
