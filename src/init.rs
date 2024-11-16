@@ -59,12 +59,13 @@ pub fn git_init() {
     }
 
     // Create and switch to the 'main' branch
+    print!("  Specify the branch: ");
+    io::stdout().flush().expect("failed to flush stdout");
     let mut new_branch = String::new();
     io::stdin()
         .read_line(&mut new_branch)
         .expect("failed to read line");
-    print!("  Specify the branch:");
-    io::stdout().flush().expect("failed to flush stdout");
+
     let new_branch = new_branch.trim();
 
     let mut branch_command = Command::new("git")
