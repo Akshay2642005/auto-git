@@ -1,3 +1,5 @@
+use dialoguer::theme::ColorfulTheme;
+use dialoguer::Select;
 use names::Generator;
 use std::fs::File;
 use std::io::{self, Write};
@@ -174,38 +176,33 @@ fn name_generator() -> String {
     let mut generator = Generator::default();
     generator.next().unwrap()
 }
+
 fn main() {
     println!(
         "\n   
-    █████╗ ██╗   ██╗████████╗ ██████╗        ██████╗ ██╗████████╗
-    ██╔══██╗██║   ██║╚══██╔══╝██╔═══██╗      ██╔════╝ ██║╚══██╔══╝
-    ███████║██║   ██║   ██║   ██║   ██║█████╗██║  ███╗██║   ██║   
-    ██╔══██║██║   ██║   ██║   ██║   ██║╚════╝██║   ██║██║   ██║   
-    ██║  ██║╚██████╔╝   ██║   ╚██████╔╝      ╚██████╔╝██║   ██║   
-    ╚═╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝        ╚═════╝ ╚═╝   ╚═╝   
+             █████╗ ██╗   ██╗████████╗ ██████╗        ██████╗ ██╗████████╗
+            ██╔══██╗██║   ██║╚══██╔══╝██╔═══██╗      ██╔════╝ ██║╚══██╔══╝
+            ███████║██║   ██║   ██║   ██║   ██║█████╗██║  ███╗██║   ██║   
+            ██╔══██║██║   ██║   ██║   ██║   ██║╚════╝██║   ██║██║   ██║   
+            ██║  ██║╚██████╔╝   ██║   ╚██████╔╝      ╚██████╔╝██║   ██║   
+            ╚═╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝        ╚═════╝ ╚═╝   ╚═╝   
                                                                  \n "
     );
-    println!("1. Initialize a new git repository");
-    println!("2. Update the git repository");
-    print!("> Please select an option: ");
-    io::stdout().flush().unwrap();
-
-    let mut input = String::new();
-    io::stdin()
-        .read_line(&mut input)
-        .expect("failed to read line");
-
-    let choice: u32 = match input.trim().parse() {
-        Ok(num) => num,
-        Err(_) => {
-            println!("Invalid input. Please enter a number");
-            return;
-        }
-    };
-
-    match choice {
-        1 => git_init(),
-        2 => git_update_repo(),
-        _ => println!("Invalid choice. Please enter a valid number"),
+    let options = vec![
+        "Initialize a new git repository",
+        "Update the git repository",
+        "Exit",
+    ];
+    let selection = Select::with_theme(&ColorfulTheme::default())
+        .with_prompt("Please select an option")
+        .items(&options)
+        .default(0)
+        .interact()
+        .unwrap();
+    match options[selection] {
+        "Initialize a new git repository" => git_init(),
+        "Update the git repository" => git_update_repo(),
+        "Exit" => exit(0),
+        _ => println!("Invalid option selected."),
     }
 }
