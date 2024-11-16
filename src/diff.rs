@@ -1,1 +1,0 @@
-fn git_diff() {}
