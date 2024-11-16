@@ -176,18 +176,7 @@ fn name_generator() -> String {
     let mut generator = Generator::default();
     generator.next().unwrap()
 }
-
 fn main() {
-    println!(
-        "\n   
-             █████╗ ██╗   ██╗████████╗ ██████╗        ██████╗ ██╗████████╗
-            ██╔══██╗██║   ██║╚══██╔══╝██╔═══██╗      ██╔════╝ ██║╚══██╔══╝
-            ███████║██║   ██║   ██║   ██║   ██║█████╗██║  ███╗██║   ██║   
-            ██╔══██║██║   ██║   ██║   ██║   ██║╚════╝██║   ██║██║   ██║   
-            ██║  ██║╚██████╔╝   ██║   ╚██████╔╝      ╚██████╔╝██║   ██║   
-            ╚═╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝        ╚═════╝ ╚═╝   ╚═╝   
-                                                                 \n "
-    );
     let options = vec![
         "Initialize a new git repository",
         "Update the git repository",
