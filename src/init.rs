@@ -59,10 +59,18 @@ pub fn git_init() {
     }
 
     // Create and switch to the 'main' branch
+    println!("  Specify the branch:");
+    let mut new_branch = String::new();
+    io::stdin()
+        .read_line(&mut new_branch)
+        .expect("failed to read line");
+    io::stdout().flush().expect("failed to flush stdout");
+    let new_branch = new_branch.trim();
+
     let mut branch_command = Command::new("git")
         .arg("branch")
         .arg("-M")
-        .arg("main")
+        .arg(new_branch)
         .spawn()
         .expect("failed to execute process");
 
@@ -76,8 +84,8 @@ pub fn git_init() {
     }
 
     // Ask for remote repository URL
-    println!("Initialized git repository in the current directory.");
-    print!("Enter the remote repository URL: ");
+    println!("=>Initialized git repository in the current directory.");
+    print!("  Enter the remote repository URL: ");
     io::stdout().flush().expect("failed to flush stdout");
 
     let mut remote_url = String::new();
@@ -114,12 +122,19 @@ pub fn git_init() {
     println!("Remote repository added successfully.");
 
     // Push changes to the remote repository
-    println!("Pushing changes to remote repository...");
+    println!("=>Pushing changes to remote repository...");
+    println!("  Specify the branch:");
+    let mut p_branch = String::new();
+    io::stdin()
+        .read_line(&mut p_branch)
+        .expect("failed to read line");
+    io::stdout().flush().expect("failed to flush stdout");
+    let p_branch = p_branch.trim();
     let mut push_command = Command::new("git")
         .arg("push")
         .arg("-u")
         .arg("origin")
-        .arg("main")
+        .arg(p_branch)
         .spawn()
         .expect("failed to execute process");
 
@@ -132,5 +147,5 @@ pub fn git_init() {
         exit(status.code().unwrap_or(1));
     }
 
-    println!("Pushed changes successfully to the remote repository.");
+    println!("=>Pushed changes successfully to the remote repository.");
 }
