@@ -185,12 +185,11 @@ fn main() {
     ╚═╝  ╚═╝ ╚═════╝    ╚═╝    ╚═════╝        ╚═════╝ ╚═╝   ╚═╝   
                                                                  \n "
     );
-    println!(
-        "
-        1. Initialize a new git repository\n
-        2. Update the git repository"
-    );
-    print!("  Please select an option: ");
+    println!("1. Initialize a new git repository");
+    println!("2. Update the git repository");
+    print!("> Please select an option: ");
+    io::stdout().flush().unwrap();
+
     let mut input = String::new();
     io::stdin()
         .read_line(&mut input)
