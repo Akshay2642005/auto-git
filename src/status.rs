@@ -9,8 +9,8 @@ pub fn git_status() {
     let output = String::from_utf8(output.stdout).unwrap();
 
     if output.is_empty() {
-        println!("🌳 Clean");
+        println!("🌳 Clean, No Changes");
     } else {
-        println!("🌳 Dirty");
+        println!("🌳 Changes Detected:{}", output);
     }
 }
