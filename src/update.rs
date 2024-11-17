@@ -24,6 +24,7 @@ pub fn git_update_repo() {
     }
     let mut push_command = Command::new("git")
         .arg("push")
+        .arg("-q")
         .spawn()
         .expect("failed to execute process");
     let status = push_command.wait().expect("failed to wait on child");
