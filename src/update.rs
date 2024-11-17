@@ -16,6 +16,7 @@ pub fn git_update_repo() {
         .arg("commit")
         .arg("-m")
         .arg(name_generator())
+        .arg("-q")
         .spawn()
         .expect("failed to execute process");
     let status = commit_command.wait().expect("failed to wait on child");
@@ -31,6 +32,7 @@ pub fn git_update_repo() {
     if !status.success() {
         exit(status.code().unwrap_or(1));
     }
+    println!("Git repository updated successfully.");
 }
 
 // Generate a random name for the commit message
